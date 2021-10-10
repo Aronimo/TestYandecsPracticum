@@ -1,0 +1,25 @@
+body
+{
+
+}
+.Nav_Menu {
+    
+}
+.Navbar_nav {
+    font-size: 1.15rem;
+}
+.Navbar_width_page { 
+    width: 100%;
+}
+.Navbar_flex_grow1 {
+    flex-grow:1
+}
+
+.Navbar_flex_grow2 {
+    flex-grow: 2
+}
+
+.Navbar_flex_grow3 {
+    flex-grow: 3
+}
+
