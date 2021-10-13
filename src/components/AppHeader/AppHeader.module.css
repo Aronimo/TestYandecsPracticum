@@ -87,6 +87,7 @@
     top: 40px;
     /* interface/modal-bg */
     background: #1C1C21;
+    z-index: 100;
     /* interface/accent */
     /*border: 2px solid #4C4CFF;
     box-sizing: border-box;*/

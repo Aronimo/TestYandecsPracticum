@@ -1,6 +1,7 @@
-.App {
+/*.App {
   text-align: center;
 }
+
 
 .App-logo {
   height: 40vmin;
@@ -36,3 +37,29 @@
     transform: rotate(360deg);
   }
 }
+*/
+
+.BurgerDiv {
+    /* BurgerIngredients */
+    position: fixed;
+    width: 600px;
+    height: calc(100% - 128px);
+    left: 50%;
+    /* interface/bg */
+    background: #131316;
+    /* interface/accent */
+    border: 2px solid #4C4CFF;
+    display: grid;
+    top: 128px;
+}
+
+.BurgerIngredients {
+    margin: 0 0 0 -620px;
+    composes: BurgerDiv;
+}
+
+.BurgerConstructor {
+    margin: 0 0 0 20px;
+    composes: BurgerDiv
+}
+

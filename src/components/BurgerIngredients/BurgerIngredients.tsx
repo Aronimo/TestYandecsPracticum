@@ -2,6 +2,7 @@ import React from 'react';
 import { Tab, Counter, CurrencyIcon } from '../../index';
 import ScrollableAnchor from 'react-scrollable-anchor';
 import { Console } from 'console';
+import style from './BurgerIngredients.module.css'
 
 interface IAppBurgerIngreds {
     condition: string,
@@ -46,6 +47,7 @@ class AppBurgerIngredients extends React.Component<IAppBurgerIngreds> {
   render() {
       return (
           <>
+              <label className={style.Title}>Соберите Бургер</label>
               <Tabs />
               <ListIngredients condition={this.props.condition} data={this.state.Data} AddIndigriend={this.AddIndigriend} />
           </>
@@ -58,12 +60,12 @@ const Tabs = () => {
     //Object.entries(TypeIngredient)
     const [current, setCurrent] = React.useState("bun")
     return (
-        <div style={{ display: 'flex' }}>
+        <div className={style.Tabs}>
             {
                 Object.entries(TypeIngredient).map(
                     ([key, value]) => (
                         <Tab value={key} active={current === key} onClick={setCurrent  }>
-                            <a href={'#' + key}> {value} </a>
+                            {value}
                         </Tab>)
                 )
             }
@@ -73,23 +75,22 @@ const Tabs = () => {
 
 const ListIngredients = (props: { condition: string, data: any, AddIndigriend: any }) => {
     return (
-        <div style={{ overflowY: 'scroll', height: '500px' }}>
+        <div style={{ overflowY: 'scroll' }}>
             {
                 Object.entries(TypeIngredient).map(
                     ([key, value]) => (
                         <>
                             {/*разобратся а Anchor в рамках скрола внутри Div
                             вроде нужно есть решение в рамках Element - нужно разобраться*/}
-                            <ScrollableAnchor id={key} >
-                                <div>
-                                    <label className="text text_type_main-default p-2'" >{value} </label>
-                                </div>
-                            </ScrollableAnchor>
+
+                            <div>
+                                <label className="text text_type_main-default p-2'" >{value} </label>
+                            </div>
                             <div style={{ display: 'flex', flexWrap: 'wrap', alignSelf: 'center' }}>
                                 {
                                     props.data.filter((f: { type: string; }) => f.type === key).map((item: any) => (
-                                        <div key={item._id} className="p-2" style={{ width: '260px', position: 'relative', cursor:'pointer' }} onClick={() => props.AddIndigriend(item._id)} >
-                                                <Ingredient condition={props.condition} item={item} />
+                                        <div key={item._id} className="p-2" style={{ width: '260px', position: 'relative', cursor: 'pointer' }} onClick={() => props.AddIndigriend(item._id)} >
+                                            <Ingredient condition={props.condition} item={item} />
                                         </div>
                                     ))
                                 }

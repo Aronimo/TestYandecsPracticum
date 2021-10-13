@@ -1,11 +1,13 @@
 import React from 'react';
+
 import AppHeader from './components/AppHeader/AppHeader';
 import AppBurgerIngredients from './components/BurgerIngredients/BurgerIngredients';
 import { AppBurgerConstructor } from './components/BurgerConstructor/BurgerConstructor';
 
 import logo from './logo.svg';
-import './App.css';
+import style from './App.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 //переделать на declare type TIconTypes = 'secondary' | 'primary' | 'error' | 'success';
 let condition = "";
@@ -231,8 +233,8 @@ function App() {
         <div className="App">
             <header className="App-header">
                 <AppHeader />
-                <AppBurgerIngredients condition={condition} data={Data} />
-                <AppBurgerConstructor condition={condition} data={Data} DelFunction={DelindegriensConstructor} />
+                <div className={style.BurgerIngredients}><AppBurgerIngredients condition={condition} data={Data} /></div>
+                <div className={style.BurgerConstructor}><AppBurgerConstructor condition={condition} data={Data} DelFunction={DelindegriensConstructor} /></div>
             </header>
         </div>
     );
