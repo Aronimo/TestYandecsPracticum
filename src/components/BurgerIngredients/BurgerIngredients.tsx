@@ -1,12 +1,15 @@
 import React from 'react';
 import { Tab, Counter, CurrencyIcon } from '../../index';
+import Modal from '../Popup/Popup';
 import ScrollableAnchor from 'react-scrollable-anchor';
 import { Console } from 'console';
 import style from './BurgerIngredients.module.css'
+import { Prev } from 'react-bootstrap/esm/PageItem';
 
 interface IAppBurgerIngreds {
     condition: string,
-    data: any
+    data: any,
+    DataConstructor: any
 }
 
 enum TypeIngredient {
@@ -16,40 +19,77 @@ enum TypeIngredient {
 }     
 
 class AppBurgerIngredients extends React.Component<IAppBurgerIngreds> {
-    constructor(props: { condition: string, data:any} ) {
+    constructor(props: { condition: string, data: any, DataConstructor :any } ) {
         super(props);
-        console.log(props.data)
     };
 
     state = {
-        Data: this.props.data
+        Data: this.props.data,
+        DataConstructor: this.props.DataConstructor,
+        itemPopup: "0"
     };
 
-    AddIndigriend = (id: string) => {
-        var DataNew = this.state.Data;
-        let indexElement = DataNew.findIndex((f: { _id: string; }) => f._id == id);
-        let countBun = 0;
-        if (DataNew[indexElement].type == "bun") {
-            DataNew.filter((f: { type: string; }) => f.type === "bun").map((item: any) => countBun += item.__v);
-        }
-        console.log(countBun)
-        console.log(DataNew)
-        if (countBun == 0) {
-            DataNew[indexElement].__v = DataNew[indexElement].__v + 1;
-            console.log(',kf ,kf' + id + ' ' + DataNew[indexElement].__v);
-            this.setState(prev => ({
-                ...prev,
-                Data: DataNew
-            }))
-        } else (alert(TypeIngredient.bun + " была добавлена ранее"))
+    setitemPopup = (_id: any) => {
+        console.log(_id)
+                this.setState(prev => ({
+                    ...prev,
+                    itemPopup: _id
+                }))
     }
 
-  render() {
-      return (
-          <>
+    setDefitemPopup = () => {
+        
+        this.setState(prev => ({
+            ...prev,
+            itemPopup: "0"
+        }))
+    }
+
+    renderDetail = () => {
+        console.log(this.state.itemPopup)
+        var item = this.state.Data.find((f: { _id: string; }) => f._id == this.state.itemPopup);
+
+        return (
+            <>
+                {this.state.itemPopup != "0" && (
+                    <div className={style.TitleDetail}>
+                        <div className={style.TitlePopup}>
+                            <label>Детали ингредиента</label>
+                        </div>
+                        <div>
+                            <img src={item.image_large} />
+                        </div>
+                        <div className={style.TitleIngName}>
+                            <label>{item.name}</label>
+                        </div>
+                        <div className={style.TitleEnergyValue}>
+                            <div>
+                                <label>Калории, ккал </label><br/>
+                                <label>{item.calories}</label></div>
+                            <div>
+                                <label>Белки, г </label><br />
+                                <label>{item.proteins}</label></div>
+                            <div>
+                                <label>Жиры, г </label><br />
+                                <label>{item.fat}</label></div>
+                            <div>
+                                <label>Углеводы, г </label><br />
+                                <label>{item.carbohydrates}</label>
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </>
+        )
+    }
+
+    render() {
+        return (
+            <>
+              {this.state.itemPopup !== "0" && <Modal visible={true} handleClose={this.setDefitemPopup} > {this.renderDetail()}</Modal>}
               <label className={style.Title}>Соберите Бургер</label>
               <Tabs />
-              <ListIngredients condition={this.props.condition} data={this.state.Data} AddIndigriend={this.AddIndigriend} />
+              <ListIngredients condition={this.props.condition} data={this.state.Data} DataConstructor={this.state.DataConstructor} OpenPopup={this.setitemPopup} />
           </>
     );
   }
@@ -73,25 +113,22 @@ const Tabs = () => {
     )
 }
 
-const ListIngredients = (props: { condition: string, data: any, AddIndigriend: any }) => {
+const ListIngredients = (props: { condition: string, data: any, OpenPopup: any, DataConstructor: any }) => {
     return (
-        <div style={{ overflowY: 'scroll' }}>
+        <div className={style.ListIngredient}>
             {
                 Object.entries(TypeIngredient).map(
                     ([key, value]) => (
                         <>
-                            {/*разобратся а Anchor в рамках скрола внутри Div
-                            вроде нужно есть решение в рамках Element - нужно разобраться*/}
-
-                            <div>
-                                <label className="text text_type_main-default p-2'" >{value} </label>
-                            </div>
-                            <div style={{ display: 'flex', flexWrap: 'wrap', alignSelf: 'center' }}>
+                            <label className={style.Headline} >{value} </label>
+                            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                                 {
                                     props.data.filter((f: { type: string; }) => f.type === key).map((item: any) => (
-                                        <div key={item._id} className="p-2" style={{ width: '260px', position: 'relative', cursor: 'pointer' }} onClick={() => props.AddIndigriend(item._id)} >
-                                            <Ingredient condition={props.condition} item={item} />
-                                        </div>
+                                        <a>
+                                        <div key={item._id} className={style.IngredientItem} onClick={() => props.OpenPopup(item._id)} >
+                                                <Ingredient condition={props.condition} item={item} count={props.DataConstructor.filter((f: { id: any; }) => f.id == item._id).length} />
+                                            </div>
+                                            </a>
                                     ))
                                 }
                             </div>
@@ -104,26 +141,26 @@ const ListIngredients = (props: { condition: string, data: any, AddIndigriend: a
 };
 
 
-const Ingredient = (props: { condition: any, item: any }) => {
+const Ingredient = (props: { condition: any, item: any , count:any }) => {
     let title = "Белки : " + props.item.proteins +
         "\r\nЖиры : " + props.item.fat +
         "\r\nУглеводы : " + props.item.carbohydrates +
         "\r\nКалорий : " + props.item.calories;
-    let counter;
 
     return (
         <>
-            <div> <img src={props.item.image} title={title} /> {props.item.__v != 0 && <Counter size="small" count={props.item.__v} />
-            }
+            <img src={props.item.image} title={title} className={style.illustration} />
+            {typeof (props.count) !== "undefined" && <Counter size="small" count={props.count} />}
+            <div className={style.price}>
+                <label > {props.item.price} </label> <CurrencyIcon type={props.condition} />
             </div>
-            <div>
-                <label className="text text_type_main-small p-2'"> {props.item.name} </label>
+            <div className={style.Name}>
+                <label > {props.item.name} </label>
             </div>
-            <div>
-                <label className="text text_type_digits-default p-2'"> <CurrencyIcon type={props.condition} /> {props.item.price} </label>
-            </div>
+            
         </>
     )
 }
+
 
 export default AppBurgerIngredients;

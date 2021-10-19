@@ -2,11 +2,12 @@ import React from 'react';
 
 import AppHeader from './components/AppHeader/AppHeader';
 import AppBurgerIngredients from './components/BurgerIngredients/BurgerIngredients';
-import { AppBurgerConstructor } from './components/BurgerConstructor/BurgerConstructor';
+import {AppBurgerConstructor}  from './components/BurgerConstructor/BurgerConstructor';
 
 import logo from './logo.svg';
 import style from './App.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 //переделать на declare type TIconTypes = 'secondary' | 'primary' | 'error' | 'success';
@@ -222,7 +223,60 @@ let condition = "";
         "image_large": "https://code.s3.yandex.net/react/code/bun-01-large.png",
         "__v": 0
     }
- ]
+]
+ var DataConstructor = [
+    {
+        "id": "60666c42cc7b410027a1a9b1",
+        "sort": 2
+    },
+    {
+        "id": "60666c42cc7b410027a1a9b8",
+        "sort": 1
+    },
+    {
+        "id": "60666c42cc7b410027a1a9b6",
+        "sort": 3
+    },
+    {
+        "id": "60666c42cc7b410027a1a9b6",
+        "sort": 5
+    },
+    {
+        "id": "60666c42cc7b410027a1a9b7",
+        "sort": 4
+    },
+    {
+        "id": "60666c42cc7b410027a1a9b8",
+        "sort": 1
+    },
+    {
+        "id": "60666c42cc7b410027a1a9b6",
+        "sort": 3
+    },
+    {
+        "id": "60666c42cc7b410027a1a9b6",
+        "sort": 5
+    },
+    {
+        "id": "60666c42cc7b410027a1a9b7",
+        "sort": 4
+    },
+    {
+        "id": "60666c42cc7b410027a1a9b8",
+        "sort": 1
+    },
+    {
+        "id": "60666c42cc7b410027a1a9b6",
+        "sort": 3
+    },
+    {
+        "id": "60666c42cc7b410027a1a9b6",
+        "sort": 5
+    },
+    {
+        "id": "60666c42cc7b410027a1a9b7",
+        "sort": 4
+    }];
 function DelindegriensConstructor(id: string) {
     let indexElement = Data.findIndex(f => f._id == id)
     Data[indexElement].__v = 0;
@@ -232,13 +286,16 @@ function App() {
     return (
         <div className="App">
             <header className="App-header">
+                <div id="modal-root" > </div>
                 <AppHeader />
-                <div className={style.BurgerIngredients}><AppBurgerIngredients condition={condition} data={Data} /></div>
-                <div className={style.BurgerConstructor}><AppBurgerConstructor condition={condition} data={Data} DelFunction={DelindegriensConstructor} /></div>
+                <div className={style.BurgerIngredients}><AppBurgerIngredients condition={condition} data={Data} DataConstructor={DataConstructor}/></div>
+                <div className={style.BurgerConstructor}><AppBurgerConstructor DataConstructor={DataConstructor} condition={condition} data={Data} DelFunction={DelindegriensConstructor} /></div>
             </header>
         </div>
     );
 }
+
+
 
 
 
