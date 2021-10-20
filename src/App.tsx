@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, { useState } from 'react';
 import AppHeader from './components/AppHeader/AppHeader';
 import AppBurgerIngredients from './components/BurgerIngredients/BurgerIngredients';
 import {AppBurgerConstructor}  from './components/BurgerConstructor/BurgerConstructor';
@@ -7,6 +6,9 @@ import {AppBurgerConstructor}  from './components/BurgerConstructor/BurgerConstr
 import logo from './logo.svg';
 import style from './App.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { render } from 'react-dom';
+import { propTypes } from 'react-bootstrap/esm/Image';
+import { log } from 'console';
 
 
 
@@ -282,17 +284,61 @@ function DelindegriensConstructor(id: string) {
     Data[indexElement].__v = 0;
 }
 
-function App() {
-    return (
-        <div className="App">
-            <header className="App-header">
-                <div id="modal-root" > </div>
-                <AppHeader />
-                <div className={style.BurgerIngredients}><AppBurgerIngredients condition={condition} data={Data} DataConstructor={DataConstructor}/></div>
-                <div className={style.BurgerConstructor}><AppBurgerConstructor DataConstructor={DataConstructor} condition={condition} data={Data} DelFunction={DelindegriensConstructor} /></div>
-            </header>
-        </div>
-    );
+type MyProps = { };
+type MyState = { data: any, ConstructorData:any };
+
+class App extends React.Component<MyProps, MyState> {
+    constructor(props:any) {
+        super(props);
+        this.state = { data: [],ConstructorData:[] };
+    }
+
+    
+    componentDidMount() {
+        console.log('componentDidMount')
+        fetch('https://norma.nomoreparties.space/api/ingredients')
+            .then(res2 => {
+                return res2.json();
+            }).then(res  => () => {
+                console.log(res.data);
+                let dconstructor: { id: any; sort: number; }[] = [];
+                res.data.forEach((f: any) => () => {
+                    (Math.random() > 0.2 ?? dconstructor.push({ id: f._id, sort: Math.floor(Math.random() * 30) }));
+                    (Math.random() > 0.1 ?? dconstructor.push({ id: f._id, sort: Math.floor(Math.random() * 30) }));
+                    (Math.random() > 0.05 ?? dconstructor.push({ id: f._id, sort: Math.floor(Math.random() * 30) }))
+                }
+                )
+                this.setState(prev => ({
+                    ...prev,
+                    data: res.data,
+                    ConstructorData: dconstructor
+                }))
+            })
+            .catch(err => console.log(err));
+
+        if (this.state.data.length == 0) {
+            this.setState(prev => ({
+                ...prev,
+                data: Data,
+                ConstructorData: DataConstructor
+            }))}
+         
+    }
+        
+    render() {
+        return (
+
+            <div className="App">
+                <header className="App-header">
+                    <div id="modal-root" > </div>
+                    <AppHeader />
+                    {this.state.data.length > 0 && <div className={style.BurgerIngredients}><AppBurgerIngredients condition={condition} data={this.state.data} DataConstructor={this.state.ConstructorData} /></div>}
+                    {this.state.data.length > 0 && <div className={style.BurgerConstructor}><AppBurgerConstructor DataConstructor={this.state.ConstructorData} condition={condition} data={this.state.data} DelFunction={DelindegriensConstructor} /></div>}
+                </header>
+            </div>
+        );
+
+    }
 }
 
 
@@ -300,3 +346,4 @@ function App() {
 
 
 export default App;
+

@@ -22,6 +22,7 @@ class AppBurgerIngredients extends React.Component<IAppBurgerIngreds> {
     constructor(props: { condition: string, data: any, DataConstructor :any } ) {
         super(props);
     };
+    
 
     state = {
         Data: this.props.data,
@@ -46,6 +47,7 @@ class AppBurgerIngredients extends React.Component<IAppBurgerIngreds> {
     }
 
     renderDetail = () => {
+        console.log(this.props.data);
         console.log(this.state.itemPopup)
         var item = this.state.Data.find((f: { _id: string; }) => f._id == this.state.itemPopup);
 
