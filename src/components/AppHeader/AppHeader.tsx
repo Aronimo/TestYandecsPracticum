@@ -12,27 +12,14 @@ export default class AppHeader extends React.Component {
         const Type = "primary";
         function onClickOrderFeed() { }
         return (
-            <Navbar bg="dark" variant="dark" className={style.Navbar_width_page }>
-                <Container >
-                    <Navbar.Brand href="#home" className={style.Navbar_flex_grow1 + ' text text_type_main-default p-2'}>
-                        <BurgerIcon type={Type} /> Конструктор
-                    </Navbar.Brand>
-                    <Navbar.Collapse className={style.Navbar_flex_grow1 + ' text text_type_main-default p-2'}>
-                        <Nav >
-                            <Nav.Link href="#home">
-                                <MenuIcon type={Type} onClick={onClickOrderFeed} />Лента заказов
-                            </Nav.Link>
-                        </Nav>
-                    </Navbar.Collapse>
-                    <Navbar.Brand href="#home" className={style.Navbar_flex_grow3 + ' text text_type_main-default p-2'} >
-                        <Logo />
-                    </Navbar.Brand>
-
-                    <Navbar.Brand href="#home" className={style.Navbar_flex_grow2 + ' text text_type_main-default p-2'} >
-                        <ProfileIcon type={Type} /> Личный кабинет
-                    </Navbar.Brand>
-                </Container>
-            </Navbar>
+            <Nav className={style.NavigatorPanel}>
+                <Nav.Item className={style.NavigatorItem} >
+                    <section className={style.Navgationlink}> <BurgerIcon type={Type} /> <label className={style.NavgationLabel + ' text text_type_main-default'} >Конструктор</label> </section>
+                    <section className={style.Navgationlink}> <MenuIcon type="secondary" /> <label className={style.NavgationLabel + ' text text_type_main-default'}>Лента заказов</label> </section>
+                </Nav.Item>
+                <div className={style.logo}><Logo /></div>
+                <section className={style.Navgationlink + ' ' + style.Auth}> <ProfileIcon type="secondary" /> <label className={style.NavgationLabel + ' text text_type_main-default'}>Личный кабинет</label> </section>
+            </Nav>
         )
     }
 }

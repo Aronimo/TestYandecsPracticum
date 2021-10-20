@@ -1,25 +1,112 @@
-body
-{
-
+.Navgationlink {
+    /* navigation link/active */
+    /* Auto Layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 16px 20px;
+    width: 197px;
+    height: 56px;
+    position: static;
+    left: 50%;
+    top: 0px;
+    /* interface/modal-bg */
+    background: #1C1C21;
+    /* interface/accent */
+    /*border: 1px dashed #4C4CFF;
+    box-sizing: border-box;
+    border-radius: 40px;*/
+    /* Inside Auto Layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0 1rem 0 0;
 }
-.Nav_Menu {
+
+.NavigatorItem {
+    /* navigation */
+    /* Auto Layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    position: inherit;
+    align-items: center;
+    width: 383px;
+    height: 3.5rem;
+    left: 50%;
+    /*top: calc(50% - 56px/2);*/
+    /* interface/modal-bg */
+    background: #1C1C21;
+    margin: 1rem 0 1rem -40rem;
+}
+
+.Auth {
+    /* navigation link/inactive */
+    /* Auto Layout */
+    position: inherit;
+    width: 207px;
+    margin: 1rem 0.5rem 1rem 27.063rem;
+}
+
+.Navgationlink:first-child {
+    width: 178px;
+}
+.Navgationlink:first-child > .NavgationLabel {
+    color: #F2F2F3;
     
 }
-.Navbar_nav {
-    font-size: 1.15rem;
-}
-.Navbar_width_page { 
-    width: 100%;
-}
-.Navbar_flex_grow1 {
-    flex-grow:1
+.Navgationlink > :first-child {
+    margin: 0 8px 0 0;
 }
 
-.Navbar_flex_grow2 {
-    flex-grow: 2
+.NavgationLabel {
+    /* Конструктор */
+    /*width: 125px;*/
+    height: 24px;
+    left: 0px;
+    top: 0px;
+    /* desktop/text */
+    font-family: JetBrains Mono;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height, or 150% */
+    display: flex;
+    align-items: center;
+    /* text/primary-light (standart text) */
+    color: #8585AD;
 }
 
-.Navbar_flex_grow3 {
-    flex-grow: 3
+.NavigatorPanel {
+    /* navigation panel/desktop */
+    position: absolute;
+    min-width: 82.25rem;
+    height: 88px;
+    left: 2%;
+    right: 2%;
+    top: 40px;
+    /* interface/modal-bg */
+    background: #1C1C21;
+    z-index: 100;
+    /* interface/accent */
+    /*border: 2px solid #4C4CFF;
+    box-sizing: border-box;*/
+    /* card/x-large */
+    box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+}
+
+.logo > :first-child {
+    /* logo */
+    position: absolute;
+    width: 289.15px; /* position the left edge of the element at the middle of the parent */
+    height: 40px;
+    margin: 24px 0 24px -145px;
+    left: 50%;
+    align-items: center;
+    /* interface/modal-bg */
+    background: #1C1C21;
+    /* interface/accent */
+    /*border: 1px dashed #4C4CFF;
+        */
 }
 

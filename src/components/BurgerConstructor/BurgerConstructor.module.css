@@ -1,3 +1,155 @@
 body
 {
 }
+
+.Constructor {
+    position: static;
+    height: 80px;
+    left: 0px;
+    top: 96px;
+    /* interface/accent */
+
+    /*border: 1px dashed #4C4CFF;*/
+    /* Inside Auto Layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 16px 0px;
+    display: flex;
+    gap: 10px;
+    margin: 4px 0;
+    width: 100%;
+    align-items: center;
+}
+    .Constructor > div {
+        max-width: 100%;
+        margin-right:16px;
+    }
+
+
+.Checkout {
+    /* price */
+    /* Auto Layout */
+
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0px;
+    position: static;
+    display: flex;
+    height: 64px;
+    right: 255px;
+    top: 0px;
+    /* interface/accent */
+
+    /*border: 1px dashed #4C4CFF;*/
+    /* Inside Auto Layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 40px 40px;
+}
+    .Checkout > button {
+        margin: 0 0 0 40px;
+    }
+    .Checkout > div {
+        font-family: Iceland;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 48px;
+        line-height: 36px;
+        /* identical to box height, or 75% */
+
+        display: flex;
+        align-items: center;
+        text-align: right;
+        /* text/primary-light (standart text) */
+
+        color: #F2F2F3;
+    }
+
+    .Checkout svg {
+        height: 33px;
+        width: 33px;
+        margin: 0 0 0 10px;
+    }
+        .ListIngredient {
+            overflow-y: overlay;
+            /*height: calc(100% - 196px);*/
+        }
+.ListIngredient::-webkit-scrollbar {
+    width: 8px;
+}
+
+.ListIngredient::-webkit-scrollbar-thumb {
+    background-color: #8585AD;
+}
+
+.ListIngredient::-webkit-scrollbar-track {
+    background-color: #2F2F37;
+    /*border: 1px dashed #4C4CFF;*/
+}
+.PopupDetail {
+    margin-top:120px;
+    width: 720px;
+    height: 718px;
+}
+
+.NumerOrder {
+    font-family: Iceland;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 144px;
+    line-height: 120px;
+    /* identical to box height, or 83% */
+
+    text-align: center;
+    /* text/primary-light (standart text) */
+
+    color: #F2F2F3;
+}
+.NumerOrderTitle {
+    font-family: JetBrains Mono;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 30px;
+    /* identical to box height, or 125% */
+
+    text-align: center;
+    /* text/primary-light (standart text) */
+
+    color: #F2F2F3;
+    margin-top: 32px;
+    margin-bottom: 60px;
+}
+.CheckMarkIconPopupDetail {
+    text-align: center;
+}
+.Text1 {
+    font-family: JetBrains Mono;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height, or 150% */
+
+    text-align: center;
+    /* text/primary-light (standart text) */
+
+    color: #F2F2F3;
+    margin-top: 60px;
+    margin-bottom:8px
+}
+
+.Text2 {
+    font-family: JetBrains Mono;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height, or 150% */
+
+    text-align: center;
+    /* text/dark grey (secondary text) */
+
+    color: #8585AD;
+}
